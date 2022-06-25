@@ -393,17 +393,7 @@ public class Customer implements ATM {
 }
 =====================================================================
 Q4 A. 
-Liskov Substitution Principle (LSP)
-
-The principle says that any class must be directly
-replaceable by any of its subclasses without error.
-
-In other words, each subclass must maintain all behavior from
-the base class along with any new behaviors unique to the
-subclass.
-
- The child class must be able to process all the same
-requests and complete all the same tasks as its parent class.
+Interface Segregation Principle (ISP)
 
 
 B.
@@ -411,58 +401,82 @@ B.
 
 package com.sprint1q4;
 
-public class  Manager {
+public Interface  ReadManager {
   void read();
-   void write();
+   
  
 }
+public Interface  WriteManager {
+void write();
+   
+ 
+}
+
 
 package com.sprint1q4;
 
-public class RealmManager extends Manager{
+public Interface RealmManagerReadManager extends ReadManager {
 	 void read() {
 		System.out.println("RealmManager");
-	}
-	static void write() {
+	}	 
+}
+public Interface RealmManagerReadManager extends  WriteManager {
+	 void void write();{
 		System.out.println("RealmManager");
-	}
+	}	 
+}
+--------------------------------------------------------------
+
+
+public Interface  DataManagerReadManager extends ReadManager {
+	 void read() {
+		System.out.println("RealmManager");
+	}	 
 }
 
-
-public class DataManager  extends Manager {
-	static	void read() {
-		System.out.println("DataManager");
-	}
-	static	void write() {
-		System.out.println("DataManager");
-	}
+public Interface  DataManagerReadManager extends  WriteManager {
+	 void void write();{
+		System.out.println("RealmManager");
+	}	 
 }
 
- public DisckRealmManager extends RealmManager{
-	 static void read() {
-			System.out.println("DisckRealmManager");
-		}
-	 static	void write() {
-			System.out.println("DisckRealmManager");
-		}
- }
+ ----------------------------------------------------
+public Interface  DisckRealmReadManager extends ReadManager {
+	 void read() {
+		System.out.println("RealmManager");
+	}	 
+}
 
+public Interface  DisckRealmReadManager extends  WriteManager {
+	 void void write();{
+		System.out.println("RealmManager");
+	}	 
+}
+
+----------------------------------------------------------
+public Interface  InmemorialRealmReadManager extends ReadManager {
+	 void read() {
+		System.out.println("RealmManager");
+	}	 
+}
+
+public Interface  InmemorialRealmReadManager extends  WriteManager {
+	 void void write();{
+		System.out.println("RealmManager");
+	}	 
+}
+
+--------------------------------------------------------
+
+ public Interface DisckCoreRealmReadManager extends ReadManager {
+	 void read() {
+		System.out.println("RealmManager");
+	}	 
+}
  
- InmemorialRealmManager extends RealmManager{
-	 static void read() {
-			System.out.println("InmemorialRealmManager");
-		}
-	 static void write() {
-			System.out.println("InmemorialRealmManager");
-		}
- }
  
 
- DisckCoreRealmManager extends DataManager{
-	static void rea1() {
-			System.out.println("DisckCoreRealmManager");
-		}
- }
+  
 
 
 
