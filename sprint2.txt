@@ -1,0 +1,242 @@
+Q1 We want to design a social media application which allows me to connect to my
+friends on all four social platforms i.e. Facebook, Google Plus, Twitter and Orkut (for
+example sake). Now I want that client to be able to tell the name of friend and
+desired platform – then my application should connect to him transparently.
+More importantly, if I want to add more social platforms into an application then
+application code should accommodate it without breaking the design.
+===========================================================================
+ 
+Q3. What is the Singleton Design Pattern? Explain with an example and where can
+it be used? Also Explain eager and Lazy initialization.
+
+The singleton pattern is one of the simplest design patterns.
+Sometimes we need to have only one instance of our class for
+example a single DB connection shared by multiple objects as
+creating a separate DB connection for every object may be
+costly. Similarly, there 
+can be a single configuration manager or error manager in an
+application that handles all problems instead of creating multiple managers.
+----------------------------------------------------------
+class Singleton
+{
+    private static Singleton obj;
+ 
+    
+    private Singleton() {}
+ 
+    public static Singleton getInstance()
+    {
+        if (obj==null)
+            obj = new Singleton();
+        return obj;
+    }
+part-2 make getInstance() synchronized 
+class Singleton
+{
+    private static Singleton obj;
+ 
+    private Singleton() {}
+ 
+    // Only one thread can execute this at a time
+    public static synchronized Singleton getInstance()
+    {
+        if (obj==null)
+            obj = new Singleton();
+        return obj;
+    }
+}
+part-3 Eager Instantiation 
+
+class Singleton
+{
+    private static Singleton obj = new Singleton();
+ 
+    private Singleton() {}
+ 
+    public static Singleton getInstance()
+    {
+        return obj;
+    }
+}
+part-4  Use lazy loading
+class Singleton
+{
+    private static volatile Singleton obj  = null;
+ 
+    private Singleton() {}
+ 
+    public static Singleton getInstance()
+    {
+        if (obj == null)
+        {
+            // To make thread safe
+            synchronized (Singleton.class)
+            {
+                // check again as multiple threads
+                // can reach above step
+                if (obj==null)
+                    obj = new Singleton();
+            }
+        }
+        return obj;
+    }
+}
+--------------------------------------------
+Eager initialization:
+ This is the simplest method of creating a singleton class. In 
+this, object of class is created when it is loaded to the memory by JVM. It is done
+ by assigning the reference of an instance directly. 
+It can be used when program will always use instance of this class, or the cost of 
+creating the instance is not too large in terms of resources and time.
+-------------------------------------------------------
+Lazy initialization: In this method, object is created only if it is needed. 
+This may prevent resource wastage. An implementation of getInstance() method 
+is required which return the instance. There is a null check that if object
+ is not created then create, otherwise return previously created. To make
+ sure that class cannot be instantiated in any other way, constructor is made final. As object
+ is created with in a method, it ensures that object will not be created until
+ and unless it is required. Instance is kept private so that no one can access it directly. 
+====================================================================================
+Q2.Design an online book reader system.
+that provides the following functionality:
+• Searching the database of books and reading a book.
+• User membership creation and extension.
+• Only one active user at a time and only one active book by this user
+---------------------------------------------------------------
+
+Assumptions-
+B.class[ OnlineReaderSystem] represents the body of our program.
+A. Implementing classes are -
+
+1. User
+2. Book
+3. Library
+4. UserManager
+5. Display
+6. OnlineReaderSystem
+
+-------------------------------------------------
+Part 1
+class OnlineReaderSystem {//
+
+      Library library; 
+      UserManager userManager; 
+      Display display; 
+      activeBook 
+      User activeUser; 
+      OnlineReaderSystem(){} 
+}
+  
+part-2
+class Library { 
+//all books as a list
+
+     List  books;
+
+    
+//functionalties-
+
+      addBook( ){}
+      remove(Book b){}
+      find( ){ }
+
+//contructore
+Library (){}
+}
+ 
+part3
+ class UserManager {
+      users;
+
+      //Manger work
+
+      addUser( ){}
+      find(){}
+
+//constructor
+
+UserManager(){}
+
+}
+part4
+class Display {
+        activeBook;
+        activeUser;
+	pageNumbe;
+        activeBook;
+
+        displayUser(){}
+        displayBook(){}
+
+       
+
+        refreshTitle();
+        refreshDetails();
+        refreshPage();
+    }
+       refreshUsername(){}
+       refreshTitle(){}
+       refreshDetails(){}
+       refreshPage(){}
+}
+part5-
+class Book {
+      bookId;
+      details;
+      title;
+}
+part6
+class User {
+     userId;
+     name;
+     details;
+
+     renewMembership(){}
+}
+part-7
+  class Chadnan'sLibrary{
+  
+    public static void main(String[] args){   
+
+        OneReaderSystem onlineReaderSystem = new OnlineReaderSystem()
+
+        Book dsBook = new Book( );
+
+        onleReaderSystem.getLibrary().addBook( );
+
+        User chadan  = new User("Chandan")
+
+        onlineReaderSystem.getUserManager().addUser(chadan);
+
+        onlineReaderSystem.setActiveBook();
+         
+        
+    }
+}
+===============================================================
+Q1 We want to design a social media application which allows me to connect to my
+friends on all four social platforms i.e. Facebook, Google Plus, Twitter and Orkut (for
+example sake). Now I want that client to be able to tell the name of friend and
+desired platform – then my application should connect to him transparently.
+More importantly, if I want to add more social platforms into an application then
+application code should accommodate it without breaking the design.
+
+ 
+public class Demo {
+public static void main(String[] args) {
+// any social media strategy.
+SocialMediaContext context = new SocialMediaContext();
+// Setting Facebook strategy.
+context.setSocialmediaStrategy(new FacebookStrategy());
+context.connect("Lokesh");
+// Setting Twitter strategy.
+context.setSocialmediaStrategy(new TwitterStrategy());
+context.connect("Lokesh");
+// Setting GooglePlus strategy.
+context.setSocialmediaStrategy(new GooglePlusStrategy());
+context.connect("Lokesh");
+// Setting Orkut strategy.
+context.setSocialmediaStrategy(new OrkutStrategy());
+context.connect("Lokesh");
+}
+}
